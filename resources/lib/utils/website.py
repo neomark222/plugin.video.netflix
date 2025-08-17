@@ -89,7 +89,7 @@ def extract_session_data(content, validate=False, update_profiles=False):
     G.LOCAL_DB.set_value('build_identifier', user_data.get('BUILD_IDENTIFIER'), TABLE_SESSION)
     if not get_website_esn():
         set_website_esn(user_data['esn'])
-    G.LOCAL_DB.set_value('locale_id', user_data.get('preferredLocale').get('id', 'en-US'))
+    G.LOCAL_DB.set_value('locale_id', user_data.get('preferredLocale',{}).get('id', 'en-US'))
     # Extract the client version from assets core
     result = search(r'-([0-9\.]+)\.js.*$', api_data.pop('asset_core'))
     if not result:
